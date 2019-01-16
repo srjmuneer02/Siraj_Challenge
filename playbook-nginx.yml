@@ -1,0 +1,51 @@
+---
+- hosts: localhost
+  tasks:
+    - name: ensure nginx is at the latest version
+      apt: name=nginx state=latest
+    - name: start nginx
+      service:
+          name: nginx
+          state: started
+    - name: create self signed certificate 
+      become: yes
+      become_method: sudo
+      vars:
+        motd_value: "{{ lookup('file', '/home/ubuntu/ip.txt') }}"
+      command: openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN={{ motd_value }}" -keyout /etc/ssl/private/nginx-selfsigned.key -out  /etc/ssl/certs/nginx-selfsigned.crt
+    - name: nginx configuration 
+      become: yes
+      become_method: sudo
+      command: openssl dhparam -out /etc/nginx/dhparam.pem 4096
+    - name: copy nginx configuration file
+      become: yes
+      become_method: sudo
+      copy:
+        src: /home/ubuntu/allfiles/nginx/self-signed.conf
+        dest: /etc/nginx/snippets/self-signed.conf
+    - name: copy nginx configuration file
+      become: yes
+      become_method: sudo      
+      copy:
+        src: /home/ubuntu/allfiles/nginx/ssl-params.conf
+        dest: /etc/nginx/snippets/ssl-params.conf		
+    - name: copy nginx configuration file
+      become: yes
+      become_method: sudo     
+      copy:
+        src: /home/ubuntu/allfiles/nginx/default
+        dest: /etc/nginx/sites-available/    
+    - name: replace ip
+      become: yes
+      become_method: sudo     
+      vars:
+        motd_value: "{{ lookup('file', '/home/ubuntu/ip.txt') }}"
+      command: sed -i -e "s/<server-ip>/{{ motd_value }}/g" /etc/nginx/sites-available/default
+    - name: nginx restart 
+      become: yes
+      become_method: sudo
+      command: nginx -t 	
+    - name: nginx restart 
+      become: yes
+      become_method: sudo
+      command: systemctl restart nginx 

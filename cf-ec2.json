@@ -97,6 +97,7 @@
 																"mkdir -p /home/ubuntu/allfiles\n",
 																"\n",
 																"git clone https://srjmuneer02:bb839399dfe2278c81513671a11a6767090215cd@github.com/srjmuneer02/Siraj_Challenge.git /home/ubuntu/allfiles \n",
+																"ansible-playbook -i inventory.cfg /home/ubuntu/allfiles/playbook-nginx.yml\n",
 																		"\n",
 																 "cfn-signal -e 0 -r \"Stack setup complete\" '", 
 																 "#EOF"
