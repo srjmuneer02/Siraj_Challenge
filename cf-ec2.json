@@ -1,0 +1,111 @@
+{
+	        "AWSTemplateFormatVersion": "2010-09-09",
+	        "Parameters": {
+	
+	               "AMI": {
+	                       "Description": "The AMI to use to create EC2 instances",
+	                       "Type": "String",
+	                       "Default": "ami-0ac019f4fcb7cb7e6",
+	                       "MinLength": "1",
+	                       "MaxLength": "25"
+	               },
+	
+	               "InstanceType": {
+	                       "Description": "EC2 instance type",
+	                       "Type": "String",
+	                       "Default": "t2.medium"
+	                        },
+				   	
+	               "AssignedRole": {
+	                       "Description": "IAM Role to assign to instances in this auto scaling group. Leave blank if none",
+	                       "Type": "String"
+	                       
+	               },
+							  
+				   "Vpc" : {
+						 "Description": "Preferred VPC",
+						 "Type": "AWS::EC2::VPC::Id"},
+				  
+				   "Subnetid" : {
+						 "Type": "AWS::EC2::Subnet::Id"},
+						 
+				   "EC2KeyName" : {
+						 "Type": "AWS::EC2::KeyPair::KeyName"}
+						 
+				   },
+				   
+	        
+	       
+	        "Resources": {
+				"SecurityGrp": {
+					"Type" : "AWS::EC2::SecurityGroup",
+					   "Properties" : {
+						  "GroupDescription" : "Allow http/https to client host",
+							"VpcId" : {"Ref" : "Vpc"},
+							"SecurityGroupIngress" : [{
+									"IpProtocol" : "tcp",
+									"ToPort" : 80,
+									"CidrIp" : "0.0.0.0/0",
+									 "FromPort"	:80
+								 },
+								 {
+									"IpProtocol" : "tcp",
+									"ToPort" : 443,
+									"CidrIp" : "0.0.0.0/0",
+									"FromPort": 443
+								 },
+								{
+									"IpProtocol" : "tcp",
+									"ToPort" : 22,
+									"CidrIp" : "0.0.0.0/0",
+									"FromPort": 22
+								 }]
+					}
+				},
+				"Ec2InstanceLaunch": {
+					"Type": "AWS::EC2::Instance",
+					"Properties": {
+						"KeyName": { "Ref" : "EC2KeyName" },
+						"SubnetId": { "Ref" : "Subnetid" },
+						"ImageId": {
+							"Ref": "AMI"
+						},
+						"SecurityGroupIds" : [{ "Ref" : "SecurityGrp" }],
+						"InstanceType": {
+							"Ref": "InstanceType"
+						},
+						"BlockDeviceMappings": [{
+							"DeviceName": "/dev/xvda",
+							"Ebs": {
+								"VolumeSize": "30"
+							}
+						}],
+										  "UserData": {
+												  "Fn::Base64": {
+														 "Fn::Join": ["", [
+																 "#!/bin/bash -ex\n",
+																 "echo \"script_start\"\n",
+																	"echo \"nameserver 8.8.8.8\" >>/etc/resolv.conf\n",
+																 "apt-get -y update\n",
+																"apt-get -y install software-properties-common\n",
+																"apt-add-repository ppa:ansible/ansible -y\n",
+																 "apt-get -y update\n",
+																"apt-get -y install ansible\n",
+																"ansible --version\n",
+																"curl http://169.254.169.254/latest/meta-dpv4 > /home/ubuntu/ip.txt\n",
+																"cat /home/ubuntu/ip.txt \n",
+																"mkdir -p /home/ubuntu/allfiles\n",
+																"\n",
+																"git clone https://srjmuneer02:bb839399dfe2278c81513671a11a6767090215cd@github.com/srjmuneer02/Siraj_Challenge.git /home/ubuntu/allfiles \n",
+																		"\n",
+																 "cfn-signal -e 0 -r \"Stack setup complete\" '", 
+																 "#EOF"
+														 ]]
+												  }
+										  },
+										  "IamInstanceProfile" : {"Ref" : "AssignedRole"}
+								   }
+						   }
+		
+				   }    
+}
