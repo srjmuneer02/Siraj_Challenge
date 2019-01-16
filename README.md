@@ -2,7 +2,7 @@
 ## Summary
 We will run the cloudfomarion template  named "cf-ec2.json". This template spin-up a EC2 instance and the instance ansible, then runs the ansible playbook for nginx https webserver setup
 
-# Steps to Excute this cloudformation template with Ansible playbook is given below
+## Steps to Execute this Cloudformation Template with Ansible playbook is given below
 ## Step 1: Create an User in aws account for cli access
 Login to aws management console, then navigate to IAM roles service.
 
