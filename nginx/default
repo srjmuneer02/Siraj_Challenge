@@ -6,7 +6,7 @@ server {
 
     server_name <server-ip>
 
-    root /var/www/example.com/html;
+    root /var/www/html;
     index index.html index.htm index.nginx-debian.html;
 
 }

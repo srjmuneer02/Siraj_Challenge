@@ -13,10 +13,6 @@
       vars:
         motd_value: "{{ lookup('file', '/home/ubuntu/ip.txt') }}"
       command: openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN={{ motd_value }}" -keyout /etc/ssl/private/nginx-selfsigned.key -out  /etc/ssl/certs/nginx-selfsigned.crt
-    - name: nginx configuration 
-      become: yes
-      become_method: sudo
-      command: openssl dhparam -out /etc/nginx/dhparam.pem 4096
     - name: copy nginx configuration file
       become: yes
       become_method: sudo
