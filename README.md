@@ -36,9 +36,9 @@ wait 5 mins
 ## Step 4: 
 
 Check for new instance in EC2 managment console. Check the public ip for that instance and put that IP in your Browser.
-http://<public-ip>
+http://\<public-ip\>
   
-It will automatically redirect to https://<public-ip>. you might get some certificate authority waring as it has self signed certificate
+It will automatically redirect to https://\<public-ip\>. you might get some certificate authority waring as it has self signed certificate
   
 Below command to test
 ```
