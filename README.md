@@ -1,4 +1,4 @@
-# Siraj_Challenge
+# Siraj Challenge
 ## Summary
 We will run the cloudfomarion template  named "cf-ec2.json". This template spin-up a EC2 instance and the instance ansible, then runs the ansible playbook for nginx https webserver setup
 
