@@ -52,6 +52,8 @@ Total boostrap log for instance is located at /var/log/syslog
 
 Ansible logs are located at /tmp/ansible.out.log
 
+nginx configuration files and index files are located in nginx folder in this repo
+
 # Technical Details
 
 cloudfomation stack creates EC2 instance and security group with port 80(http:userd for ssl redirect), 443(https) & 22(ssh:just).
