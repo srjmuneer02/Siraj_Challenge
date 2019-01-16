@@ -5,11 +5,14 @@ We will run the cloudfomarion template  named "cf-ec2.json". This template spin-
 # Steps to Excute this cloudformation template with asible playbook is given below
 ## Step 1: Create an User in aws account for cli access
 Login to aws management console, then navigate to IAM roles service.
+
 Create one User with programming access and download Access key and secret key.
-Then assigned administrator access to this user
-Open an command prompt in my PC and run the below command 
-'''
+
+Then assigned administrator access to this user.
+
+Open an command prompt in my PC and run the below command
+```
 aws configure
-'''
+```
 above command will ask for  Access key and secret key. Please provide that
 
