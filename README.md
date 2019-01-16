@@ -30,6 +30,7 @@ goto VPC managment colsole, then get the default vpc-id and any one subnet-id  a
 aws cloudformation create-stack --stack-name myteststack01 --template-body file://Siraj_Challenge/cf-ec2.json --parameters ParameterKey=Vpc,ParameterValue=vpc-7aa04f1c ParameterKey=Subnetid,ParameterValue=subnet-2f10bf74  ParameterKey=EC2KeyName,ParameterValue=Ubuntu-12-Aug  ParameterKey=AssignedRole,ParameterValue=
 ```
 Above command will create cloudfomation stack. you can see the progress in cloudformation management console
+
 wait 5 mins
 
 ## Step 4: 
