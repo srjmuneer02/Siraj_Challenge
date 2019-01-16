@@ -23,10 +23,23 @@ git clone https://github.com/srjmuneer02/Siraj_Challenge.git
 Above command will copy the files from github repo to local pc Siraj_Challenge folder
 
 ## Step 3: Create a cloudfomation stack from the template file with following command 
+
+Goto EC2 managment console, then goto keypair section and create a key. This will be usefull for ssh if needed
+goto VPC managment colsole, then get the default vpc-id and any one subnet-id  and fill these three values in the command below
 ```
-aws cloudformation create-stack --stack-name myteststack01 --template-body file://Siraj_Challenge/cf-ec2.json --parameters ParameterKey=Vpc,ParameterValue=vpc-7aa04f1c  ParameterKey=EC2KeyName,ParameterValue=Ubuntu-12-Aug ParameterKey=Subnetid,ParameterValue=subnet-2f10bf74 ParameterKey=AssignedRole,ParameterValue=
+aws cloudformation create-stack --stack-name myteststack01 --template-body file://Siraj_Challenge/cf-ec2.json --parameters ParameterKey=Vpc,ParameterValue=vpc-7aa04f1c ParameterKey=Subnetid,ParameterValue=subnet-2f10bf74  ParameterKey=EC2KeyName,ParameterValue=Ubuntu-12-Aug  ParameterKey=AssignedRole,ParameterValue=
 ```
 Above command will create cloudfomation stack. you can see the progress in cloudformation management console
 wait 5 mins
-##Step 4: 
+
+## Step 4: 
+
+Check for new instance in EC2 managment console. Check the public ip for that instance and put that IP in your Browser.
+
+# Technical Details
+
+cloudfomation stack creates EC2 instance and security group with port 80(http:userd for ssl redirect), 443(https) & 22(ssh:just).
+EC2 instance runs bootsrap script at startup, this script installs ansible and run the ansible playbook
+
+Ansible playbook install and configure nginx server with self signed certificate and hello world demo html page. it redirect from http protocol to https as well
 
