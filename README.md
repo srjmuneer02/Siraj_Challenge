@@ -36,6 +36,15 @@ wait 5 mins
 ## Step 4: 
 
 Check for new instance in EC2 managment console. Check the public ip for that instance and put that IP in your Browser.
+http://<public-ip>
+  
+It will automatically redirect to https://<public-ip>. you might get some certificate authority waring as it has self signed certificate
+
+## Debugging details
+
+Total boostrap log for instance is located at /var/log/syslog
+
+Ansible logs are located at /tmp/ansible.out.log
 
 # Technical Details
 
@@ -43,4 +52,32 @@ cloudfomation stack creates EC2 instance and security group with port 80(http:us
 EC2 instance runs bootsrap script at startup, this script installs ansible and run the ansible playbook
 
 Ansible playbook install and configure nginx server with self signed certificate and hello world demo html page. it redirect from http protocol to https as well
+
+# Python Coding
+
+Solution for the credit card problem is aviable in filename credit_card_test.py in this repo
+
+simple run that in python 3.5 and above. Enter the credit card number and program will say wether its valid or not
+Below qare the details of regex used
+
+Identifiers
+--------------------
+/d - any number
+/b - check for whitespace
+/s - space
+/w - any character
+. any character,  except for a newline
+/. a period
+--------------------
+Modifiers
+--------------------
+{1,3} we are expecting 1-3
++ Match 1 or more
+? Match 0 or 1
+* Match 0 or more
+$ Match the end of a string
+^ matching the beggining of a string
+| either or 
+[] range of "variance"
+{x} expecting "x" amount
 
