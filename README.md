@@ -62,22 +62,39 @@ Below qare the details of regex used
 
 Identifiers
 --------------------
+
 /d - any number
+
 /b - check for whitespace
+
 /s - space
+
 /w - any character
+
 . any character,  except for a newline
+
 /. a period
+
 --------------------
 Modifiers
 --------------------
+
 {1,3} we are expecting 1-3
-+ Match 1 or more
-? Match 0 or 1
-* Match 0 or more
-$ Match the end of a string
-^ matching the beggining of a string
-| either or 
-[] range of "variance"
-{x} expecting "x" amount
+
+ \+ Match 1 or more
+
+ \? Match 0 or 1
+
+ \* Match 0 or more
+
+ \$ Match the end of a string
+
+ ^ matching the beggining of a string
+
+ | either or 
+
+ [] range of "variance"
+
+ {x} expecting "x" amount
+
 
