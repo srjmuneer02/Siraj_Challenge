@@ -63,10 +63,10 @@ Ansible playbook install and configure nginx server with self signed certificate
 
 # Python Coding
 
-Solution for the credit card problem is aviable in filename credit_card_test.py in this repo
+Solution for the credit card problem is available in filename credit_card_test.py in this repo
 
-simple run that in python 3.5 and above. Enter the credit card number and program will say wether its valid or not
-Below qare the details of regex used
+simply run that file in python 3.5 and above. Enter the credit card number and program will say weather its valid or not
+Below are the details of regex used in the python code
 
 Identifiers
 --------------------
