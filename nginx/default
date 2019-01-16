@@ -4,7 +4,7 @@ server {
     include snippets/self-signed.conf;
     include snippets/ssl-params.conf;
 
-    server_name _;
+    server_name <server-ip>
 
     root /var/www/example.com/html;
     index index.html index.htm index.nginx-debian.html;
@@ -14,7 +14,7 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name _;
+    server_name <server-ip>;
 
     return 302 https://$server_name$request_uri;
 }
