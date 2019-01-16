@@ -39,6 +39,12 @@ Check for new instance in EC2 managment console. Check the public ip for that in
 http://<public-ip>
   
 It will automatically redirect to https://<public-ip>. you might get some certificate authority waring as it has self signed certificate
+  
+Below command to test
+```
+curl https://<public-ip>
+curl http://<public-ip>
+```
 
 ## Debugging details
 
